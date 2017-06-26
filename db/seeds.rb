@@ -17,4 +17,3 @@ audition2 = Audition.create!(
   equity: true,
   time: Faker::Time.between(Date.today, 3.days.from_now, :afternoon)
 )
-binding.pry
