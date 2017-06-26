@@ -16,17 +16,16 @@ end
 
 group :development, :test do
   gem 'capybara'
+  gem 'coveralls', require: false
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'launchy', require: false
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
   gem 'valid_attribute'
-end
-
-
-group :test do
-  gem 'coveralls', require: false
+  gem 'faker'
+  gem 'as-duration'
 end
 
 group :production do
