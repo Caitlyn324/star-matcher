@@ -4,6 +4,7 @@ gem 'dotenv-rails'
 gem 'rails', '~> 5.1.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
+gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
@@ -23,6 +24,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
+  gem 'shoulda-matchers', require: false
   gem 'as-duration'
   gem 'faker'
   gem 'valid_attribute'
