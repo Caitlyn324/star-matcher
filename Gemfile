@@ -22,7 +22,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'launchy', require: false
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 3.5'w
+  gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
   gem 'shoulda-matchers', require: false
   gem 'as-duration'
