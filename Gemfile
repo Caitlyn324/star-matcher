@@ -25,7 +25,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
   gem 'shoulda-matchers', require: false
-  gem 'as-duration'
   gem 'faker'
   gem 'valid_attribute'
 end
