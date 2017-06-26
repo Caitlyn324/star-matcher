@@ -23,9 +23,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'shoulda'
-  gem 'valid_attribute'
-  gem 'faker'
   gem 'as-duration'
+  gem 'faker'
+  gem 'valid_attribute'
 end
 
 group :production do

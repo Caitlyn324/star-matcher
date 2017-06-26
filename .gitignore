@@ -27,3 +27,4 @@
 
 -version, .ruby-gemset
 /coverage
+/db/schema
