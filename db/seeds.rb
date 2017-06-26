@@ -1,4 +1,4 @@
-audition1 = Audition.create!(
+Audition.create!(
   roles: ["Pierre", "Natasha", "Sonya"],
   show: "Natasha, Pierre, And the Great Comet of 1812",
   theater: "Walnut Street Theater",
@@ -9,7 +9,7 @@ audition1 = Audition.create!(
   time: Faker::Time.between(Date.today, 3.days.from_now, :afternoon)
 )
 
-audition2 = Audition.create!(
+Audition.create!(
   roles: ["Phantom", "Christine", "The Other Guy"],
   show: "Phantom",
   address: "240 S Broad St, Philadelphia, PA 19102",
