@@ -1,5 +1,6 @@
 source 'https://rubygems.org/'
 ruby '2.3.3'
+gem 'devise'
 gem 'dotenv-rails'
 gem 'rails', '~> 5.1.0'
 gem 'pg', '~> 0.18'
