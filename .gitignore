@@ -22,8 +22,6 @@
 
 .byebug_history
 
-# these should all be checked in to normalize the environment:
-# Gemfile.lock, .
-
 -version, .ruby-gemset
 /coverage
+/db/schema
