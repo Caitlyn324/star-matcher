@@ -14,13 +14,15 @@ Audition.create!(
   show: "Phantom",
   address: "240 S Broad St, Philadelphia, PA 19102",
   theater: "Academy of Music",
+  company: "THE theater troupe",
   equity: true,
   time: Faker::Time.between(Date.today, 3.days.from_now, :afternoon)
 )
 
-User.create!(
+admin = User.create!(
   name: 'Chris Donohue',
   phone_number: '2679871412',
   email: 'chris.donohue0628@gmail.com',
   password: 'tbatst4892'
 )
+admin.confirm
