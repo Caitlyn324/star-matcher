@@ -17,3 +17,10 @@ Audition.create!(
   equity: true,
   time: Faker::Time.between(Date.today, 3.days.from_now, :afternoon)
 )
+
+User.create!(
+  name: 'Chris Donohue',
+  phone_number: '2679871412',
+  email: 'chris.donohue0628@gmail.com',
+  password: 'tbatst4892'
+)

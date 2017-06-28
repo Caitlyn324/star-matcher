@@ -1,6 +1,6 @@
 class Audition < ApplicationRecord
-  validate :roles, presence: true
-  validate :theater, presence: true
-  validate :address, presence: true
-  validate :company, presence: true
+  validates :roles, presence: true
+  validates :theater, presence: true
+  validates :address, presence: true
+  validates :company, presence: true
 end
