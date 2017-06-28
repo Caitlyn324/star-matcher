@@ -84,8 +84,6 @@ feature 'user signs up' do
     expect(page).to have_content("Email has already been taken")
   end
 
-
-
   scenario 'email is incorrectly formatted' do
     visit root_path
     click_link 'Create Account'
