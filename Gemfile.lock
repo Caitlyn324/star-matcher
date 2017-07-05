@@ -114,6 +114,7 @@ GEM
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.21.0)
+    phantomjs (2.1.1.0)
     poltergeist (1.15.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -259,6 +260,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   nokogiri
   pg (~> 0.18)
+  phantomjs
   poltergeist
   pry-rails
   puma (~> 3.0)

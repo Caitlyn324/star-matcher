@@ -4,7 +4,7 @@ backstage_page = "https://www.backstage.com/casting/?exclude_nationwide=true&gen
 
 Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  Capybara::Poltergeist::Driver.new(app, {js_errors: false, phantomjs: Phantomjs.path})
 end
 
 browser = Capybara::Session.new(:poltergeist)
