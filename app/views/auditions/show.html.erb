@@ -1,0 +1,34 @@
+<h2><%= @audition.show %></h2>
+<h3>Roles</h3>
+<ul>
+  <% @audition.roles.each do |role| %>
+    <li><%= role %></li>
+  <% end %>
+</ul>
+<h4><%= @audition.theater %></h4>
+<h4><%= @audition.address %></h4>
+<h4><%= @audition.company %></h4>
+<% if @audition.equity %>
+  <h4>Equity</h4>
+<% else %>
+  <h4>Not Equity</h4>
+<% end %>
+<h3><%= @audition.time.strftime("%e %B at %l:%M %p") %></h3>
+<% if current_actor %>
+  <% if !current_actor.auditions.include?(@audition) %>
+    <%= button_to "Save Audition", audition_participants_path(@audition) %>
+  <% else %>
+    <%= button_to "Remove Audition", audition_participant_path(@audition), method: :delete %>
+  <% end %>
+<% else %>
+  <h3>Sign in to save this audition!</h1>
+<% end %>
+
+<% if @actors.size > 0 %>
+  <h2>Interested Actors</h2>
+  <ul>
+    <% @actors.each do |actor| %>
+      <li><%= actor.name %></li>
+    <% end %>
+  </ul>
+<% end %>

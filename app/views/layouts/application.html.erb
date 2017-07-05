@@ -9,12 +9,13 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-        <li><%= link_to "My Profile", user_path(current_user) %></li>
+    <%= link_to "Auditions", root_path %>
+    <% if actor_signed_in? %>
+        <li><%= link_to "Sign Out", destroy_actor_session_path, method: :delete %></li>
+        <li><%= link_to "My Profile", actor_path(current_actor) %></li>
       <% else %>
-        <li><%= link_to "Create Account", new_user_registration_path%></li>
-        <li><%= link_to "Sign In", new_user_session_path%></li>
+        <li><%= link_to "Create Account", new_actor_registration_path%></li>
+        <li><%= link_to "Sign In", new_actor_session_path%></li>
     <% end %>
 
     <p class="notice"><%= notice %></p>

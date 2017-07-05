@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-feature 'user signs in' do
-  let!(:user) { FactoryGirl.create(:user, email: 'Emailemailemail@email.com', password: 'maybethistime') }
+feature 'actor signs in' do
+  let!(:actor) { FactoryGirl.create(:actor, email: 'Emailemailemail@email.com', password: 'maybethistime') }
 
-  scenario 'existing user specifies a valid username and password' do
+  scenario 'existing actor specifies a valid email and password' do
     visit root_path
     click_link 'Sign In'
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'Email', with: actor.email
+    fill_in 'Password', with: actor.password
     click_button 'Log in'
     expect(page).to have_content('Signed in successfully.')
     expect(page).to have_content('Sign Out')
@@ -16,7 +16,7 @@ feature 'user signs in' do
   scenario 'an invalid email and password are supplied' do
     visit root_path
     click_link 'Sign In'
-    fill_in 'Email', with: 'user'
+    fill_in 'Email', with: 'actor'
     fill_in 'Password', with: 'password'
     click_button 'Log in'
     expect(page).to have_content('Invalid Email or password.')
@@ -27,7 +27,7 @@ feature 'user signs in' do
   scenario 'right email with wrong password is supplied' do
     visit root_path
     click_link 'Sign In'
-    fill_in 'Email', with: user.email
+    fill_in 'Email', with: actor.email
     fill_in 'Password', with: 'password'
     click_button 'Log in'
     expect(page).to_not have_content('Signed in successfully.')
@@ -39,17 +39,17 @@ feature 'user signs in' do
     visit root_path
     click_link 'Sign In'
     fill_in 'Email', with: 'emale'
-    fill_in 'Password', with: user.password
+    fill_in 'Password', with: actor.password
     click_button 'Log in'
     expect(page).to have_content('Invalid Email or password.')
     expect(page).to_not have_content('Signed in successfully.')
     expect(page).to_not have_content('Sign Out')
   end
 
-  scenario 'an already authenticated user cannot re-sign in' do
-    visit new_user_session_path
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+  scenario 'an already authenticated actor cannot re-sign in' do
+    visit new_actor_session_path
+    fill_in 'Email', with: actor.email
+    fill_in 'Password', with: actor.password
     click_button 'Log in'
     expect(page).to_not have_content('Sign In')
     expect(page).to have_content('Sign Out')

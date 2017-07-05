@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user signs up' do
+feature 'actor signs up' do
   scenario 'specifying valid and require information' do
     visit root_path
     click_link 'Create Account'
@@ -10,14 +10,14 @@ feature 'user signs up' do
     fill_in 'Password confirmation', with: 'Launch'
     fill_in 'Phone Number', with: '(215)345-5176'
     click_button 'Sign up'
-    user = User.first
-    user.confirm
+    actor = Actor.first
+    actor.confirm
     visit root_path
     click_link 'Sign In'
     fill_in 'Email', with: 'Jerry.Sanchez@gmail.com'
     fill_in 'Password', with: 'Launch'
     click_button 'Log in'
-    expect(user.confirmation_token).to_not be_nil
+    expect(actor.confirmation_token).to_not be_nil
     expect(page).to have_content("Signed in successfully")
   end
 

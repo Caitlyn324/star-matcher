@@ -1,4 +1,7 @@
-class User < ApplicationRecord
+class Actor < ApplicationRecord
+  has_many :participants
+  has_many :auditions, through: :participants
+
   validates :name, presence: true, format: {
     with: /\A[a-zA-Z]+ [a-zA-Z]+\z/,
     message: 'must be a first name and last name!'
