@@ -1,6 +1,7 @@
 class Audition < ApplicationRecord
+  has_many :participants
+  has_many :actors, through: :participants
+
   validates :roles, presence: true
-  validates :theater, presence: true
-  validates :address, presence: true
   validates :company, presence: true
 end

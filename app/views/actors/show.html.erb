@@ -1,0 +1,7 @@
+<h1><%= @actor.name %></h1>
+<h2>Auditions</h2>
+<ul>
+  <% @auditions.each do |audition| %>
+    <li><%= link_to "#{audition.show}, #{audition.time.strftime("%e %b %Y at %l:%M %p")}", audition_path(audition) %></li>
+  <% end %>
+</ul>
