@@ -1,4 +1,7 @@
 <h1>Star Matcher</h1>
+<div class="app">
+
+</div>
 <% @auditions.each do |aud| %>
   <h2><%= link_to aud.show, audition_path(aud) %></h2>
   <h4><%= aud.roles.size %> role(s) available</h4>
