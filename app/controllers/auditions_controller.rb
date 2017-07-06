@@ -1,6 +1,8 @@
 class AuditionsController < ApplicationController
   def index
     @auditions = Audition.all
+    @auditions = @auditions.order(:date)
+    
     @actor = current_actor
   end
 
@@ -63,7 +65,7 @@ class AuditionsController < ApplicationController
       :company,
       :description,
       :equity,
-      :time
+      :date
     )
   end
 end
