@@ -9,6 +9,7 @@ gem 'rubocop', require: false
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
+gem 'sendgrid-ruby'
 gem 'capybara'
 gem 'phantomjs'
 gem 'poltergeist'
@@ -35,7 +36,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'sendgrid-ruby'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
