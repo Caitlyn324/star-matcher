@@ -1,10 +1,14 @@
+require 'phantomjs'
+require 'capybara/dsl'
 require 'capybara/poltergeist'
+include Capybara::DSL
 
 backstage_page = "https://www.backstage.com/casting/?exclude_nationwide=true&gender=B&geo=-75.16378900000001%2C39.952335&location=Philadelphia%2C+PA&max_age=100&min_age=0&page=1&pt=60&pt=69&pt=70&radius=10&sort_by=newest"
 
+Capybara.default_driver = :poltergeist
 Capybara.javascript_driver = :poltergeist
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, {js_errors: false})
+  Capybara::Poltergeist::Driver.new(app, {js_errors: false, phantomjs: Phantomjs.path})
 end
 
 browser = Capybara::Session.new(:poltergeist)
