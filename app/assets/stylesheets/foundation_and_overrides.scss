@@ -1,0 +1,111 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Lobster');
+
+// If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
+//
+// @import 'motion-ui/motion-ui';
+
+// We include everything by default.  To slim your CSS, remove components you don't use.
+
+@include foundation-global-styles;
+@include foundation-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-accordion;
+@include foundation-accordion-menu;
+@include foundation-badge;
+@include foundation-breadcrumbs;
+@include foundation-button-group;
+@include foundation-callout;
+@include foundation-card;
+@include foundation-close-button;
+@include foundation-drilldown-menu;
+@include foundation-dropdown;
+@include foundation-dropdown-menu;
+@include foundation-responsive-embed;
+@include foundation-label;
+@include foundation-media-object;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-off-canvas;
+@include foundation-orbit;
+@include foundation-pagination;
+@include foundation-progress-bar;
+@include foundation-slider;
+@include foundation-sticky;
+@include foundation-reveal;
+@include foundation-switch;
+@include foundation-table;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-title-bar;
+@include foundation-tooltip;
+@include foundation-top-bar;
+
+$background_color: #FBFEE5;
+$nav_bar_background: #25232D;
+$primary_font_color: #C91842;
+$secondary_font_color: #98173D;
+$box_background: #A8E7CA;
+$header_font: 'Francois One', sans-serif;
+$title_font: 'PT Sans', sans-serif;
+$content_font: 'Quicksand', sans-serif;
+
+body {
+  background: $background_color;
+  color: $primary_font_color;
+  font-family: $content_font;
+}
+
+h1 {
+  font-family: $header_font;
+}
+
+h2, h3, h4 {
+  font-family: $title_font;
+}
+
+h5 {
+  font-family: $content_font;
+}
+
+a {
+  color: $primary_font_color;
+}
+
+.button {
+  background: $primary_font_color;
+  color: $white;
+}
+
+.top-bar, .top-bar-left, .top-bar-right {
+  background: $nav_bar_background;
+  color: $secondary_font_color;
+}
+
+.top-bar a {
+  background: $nav_bar_background;
+  color: $secondary_font_color;
+  font-family: $header_font;
+}
+
+.audition-info-box {
+  color: $primary_font_color;
+  background: $box_background;
+  margin: 20px 0px;
+  padding: 10px 20px;
+}
+
+.audition-info-box p {
+  color: $secondary_font_color;
+}
+
+#header {
+  text-align: center;
+}

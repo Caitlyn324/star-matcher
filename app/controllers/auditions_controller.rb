@@ -2,14 +2,26 @@ class AuditionsController < ApplicationController
   def index
     @auditions = Audition.all
     @auditions = @auditions.order(:date)
-    
+
     @actor = current_actor
   end
 
   def show
     @audition = Audition.find(params[:id])
+    if @audition.company.include?(';')
+        @crew = @audition.company.split(';')
+    elsif @audition.company.include?(',') && !@audition.company.include?(';')
+        @crew = @audition.company.split(',')
+    else
+        @crew = [ @audition.company ]
+    end
+    @centered = ''
+    if @audition.roles.size % 2 == 1
+      @centered = 'small-centered'
+    end
     @actor = current_actor
     @actors = @audition.actors
+
   end
 
   def new # save for Director implementation

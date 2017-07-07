@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705224129) do
+ActiveRecord::Schema.define(version: 20170706215912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 20170705224129) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ethnicity"
+    t.integer "age"
+    t.string "gender"
     t.index ["confirmation_token"], name: "index_actors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_actors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_actors_on_reset_password_token", unique: true
@@ -59,6 +62,20 @@ ActiveRecord::Schema.define(version: 20170705224129) do
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_participants_on_actor_id"
     t.index ["audition_id"], name: "index_participants_on_audition_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.bigint "audition_id"
+    t.string "title"
+    t.string "gender"
+    t.integer "age_min"
+    t.integer "age_max"
+    t.string "ethnicity"
+    t.string "required_media"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.index ["audition_id"], name: "index_roles_on_audition_id"
   end
 
 end

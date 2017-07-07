@@ -1,34 +1,59 @@
-<h2><%= @audition.show %></h2>
-<h3><%= @audition.date.strftime("%e %B") %></h3>
-<h3>Roles</h3>
-<ul>
-  <% @audition.roles.each do |role| %>
-    <li><%= role %></li>
-  <% end %>
-</ul>
-<h4><%= @audition.theater %></h4>
-<h4><%= @audition.address %></h4>
-<h4><%= @audition.company %></h4>
-<% if @audition.equity %>
-  <h4>Equity</h4>
-<% else %>
-  <h4>Not Equity</h4>
-<% end %>
-<% if current_actor %>
-  <% if !current_actor.auditions.include?(@audition) %>
-    <%= button_to "Save Audition", audition_participants_path(@audition) %>
-  <% else %>
-    <%= button_to "Remove Audition", audition_participant_path(@audition), method: :delete %>
-  <% end %>
-<% else %>
-  <h3>Sign in to save this audition!</h1>
-<% end %>
+<div id="show-header">
+  <h2 class="row text-center"><%= @audition.show %></h2>
+</div>
 
-<% if @actors.size > 0 %>
-  <h2>Interested Actors</h2>
-  <ul>
-    <% @actors.each do |actor| %>
-      <li><%= actor.name %></li>
+<div class="row">
+  <div class="large-6 small-12 columns" id="show_left_info_box">
+    <h3>Date: <%= @audition.date.strftime("%e %B") %></h3>
+    <% if @audition.equity %><h3>Equity</h3><% else %><h3>Not Equity</h3><% end %>
+    <h4><%= @audition.theater %></h4>
+    <h4><%= @audition.address %></h4>
+    <div id="crew_container">
+      <h4>Crew</h4>
+      <ul>
+        <% @crew.each do |crew_member| %>
+          <li><%= crew_member %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="large-6 small-12 text-center columns" id="show_right_info_box">
+    <% if current_actor %>
+      <% if !current_actor.auditions.include?(@audition) %>
+        <%= button_to "Save Audition", audition_participants_path(@audition), class: "button" %>
+      <% else %>
+        <%= button_to "Remove Audition", audition_participant_path(@audition), method: :delete, class: "button row text-center" %>
+      <% end %>
+    <% else %>
+      <h3>Sign in to save this audition!</h1>
     <% end %>
-  </ul>
-<% end %>
+    <p><%= @audition.description %></p>
+  </div>
+</div>
+
+<div class="text-center">
+  <% if @actors.size > 0 %>
+    <h2>Interested Actors</h2>
+    <ul>
+      <% @actors.each do |actor| %>
+        <li><%= link_to actor.name, actor_path(actor) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<div class="row text-center">
+  <h3>Roles</h3>
+  <% @audition.roles.each do |role| %>
+    <div class="large-6 small-12 <%= @centered %> columns" id="show_roles_column_container">
+      <div id="show_role_tile">
+        <h4><%= role.title %></h4>
+        <h5>Age: <%= role.age_min %>-<%= role.age_max %></h5>
+        <h5>Ethnicity: <%= role.ethnicity %></h5>
+        <div class="role_description">
+          <p><%= role.description %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

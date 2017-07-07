@@ -14,7 +14,10 @@ class ApplicationController < ActionController::Base
         :name,
         :password,
         :email,
-        :phone_number
+        :phone_number,
+        :gender,
+        :age,
+        :ethnicity
       ]
     )
   end

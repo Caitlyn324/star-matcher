@@ -9,7 +9,7 @@ class AuditionsList extends Component {
     this.state = {
       auditions: [],
       currentPage: 1,
-      auditionsPerPage: 3
+      auditionsPerPage: 4
     };
 
     this.previousPage = this.previousPage.bind(this);
@@ -41,7 +41,7 @@ class AuditionsList extends Component {
     let currentAuditions;
 
     if (indexOfFirstAudition <= 0) {
-      currentAuditions = this.state.auditions.slice(0, 3);
+      currentAuditions = this.state.auditions.slice(0, 4);
     } else if (indexOfLastAudition > this.state.auditions.length) {
       indexOfLastAudition = (this.state.currentPage - 1) * this.state.auditionsPerPage;
       currentAuditions = this.state.auditions.slice(indexOfLastAudition, rightBoundIndex);
@@ -49,16 +49,6 @@ class AuditionsList extends Component {
       currentAuditions = this.state.auditions.slice(indexOfFirstAudition, indexOfLastAudition);
     }
 
-    let newAuditions = currentAuditions.map((audition, index) => {
-      console.log(audition.photo);
-      return (
-        <Audition
-          key={index}
-          id={audition.id}
-          show={audition.show}
-        />
-      );
-    });
 
     let buttons = null;
     if (this.state.auditions.length > this.state.auditionsPerPage) {
@@ -68,10 +58,39 @@ class AuditionsList extends Component {
       />;
     }
 
+    let myTypeField = <label className='small-6 columns'value="myType" id="myTypeLabel">
+      <input type="checkbox"
+      id="myTypeCheckbox"
+      value="myType"
+      checked={this.props.myType}
+      onChange={this.props.handleMyType} />Search by Your Type
+    </label>
+
+    let newAuditions = currentAuditions.map((audition, index) => {
+      var role_string;
+      if (audition.roles.length === 1) {
+        role_string = audition.roles[0].title
+      } else {
+        role_string = audition.roles.length.toString() + " Roles Available"
+      }
+
+      return (
+        <Audition
+        key={index}
+        id={audition.id}
+        show={audition.show}
+        role_string={role_string}
+        description={audition.description}
+        />
+      );
+    });
     return (
       <div>
+        <div className='row' id="search-aug">
+          {myTypeField}
+          {buttons}
+        </div>
         {newAuditions}
-        {buttons}
       </div>
     );
   }

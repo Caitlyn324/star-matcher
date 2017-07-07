@@ -1,11 +1,11 @@
 import React from 'react';
 const PaginationButtons = props => {
   return (
-    <div className="text-center">
-       <button className="hollow button numbers" onClick={props.previousPage}>
+    <div className="button-group small-6 text-right columns" id="pagination-buttons">
+       <button className="button" onClick={props.previousPage}>
          Previous Page
        </button>
-       <button className="hollow button numbers" onClick={props.nextPage}>
+       <button className="button" onClick={props.nextPage}>
          Next Page
        </button>
     </div>

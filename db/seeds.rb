@@ -18,28 +18,16 @@ end
 links.each_with_index do |link, index|
   browser.click_link link
 
-  role_divs = browser.all("div.role-group")
-  while role_divs.empty?
-    role_divs = browser.all("div.role-group")
-  end
-
-  roles = []
-  role_divs.each do |role_div|
-    roles << role_div.text
-  end
-
   equity = true
   if !union[index] || !union[index].text.downcase.include?("UNION")
     equity = false
   end
 
-  deets = []
-
   details = browser.all("div.prod-listing__details.undefined")
   while details.empty?
     details = browser.all("div.prod-listing__details.undefined")
   end
-
+  deets = []
   details.each do |detail|
     deets << detail.find("p")
   end
@@ -47,9 +35,8 @@ links.each_with_index do |link, index|
   date_string = browser.find("span.expires-text--date").text
   date = Date.parse(date_string)
 
-  audy = Audition.create!(
+  current_audition = Audition.create!(
     show: link,
-    roles: roles,
     equity: equity,
     date: date,
     company: deets[0].text,
@@ -57,13 +44,78 @@ links.each_with_index do |link, index|
     created_at: Time.now,
     updated_at: Time.now
   )
-  browser.go_back
+
+  # create each Role
+  browser.find("a", text: "Collapse").click
+  browser.find("a", text: "Expand").click
+
+  role_divs = browser.all("div.role-group")
+  while role_divs.empty?
+    role_divs = browser.all("div.role-group")
+  end
+
+
+  role_divs.each do |role_div|
+    title = role_div.find("span.name").text
+    title.slice! ":"
+
+    gender_and_age = role_div.find("span.details")
+    gender = gender_and_age.text.split(",").first
+    if gender.downcase != 'female' &&  gender.downcase != 'male'
+      gender = 'All Genders'
+    end
+
+    age_string = gender_and_age.text.split(",").last
+    age_string.slice! " "
+    if age_string.include?("+")
+      age_string.slice! "+"
+      age_min = age_string.to_i
+      age_max = 100
+    elsif age_string.include?("-")
+      age_array = age_string.split("-")
+      age_min = age_array.first.to_i
+      age_max = age_array.last.to_i
+    else
+      age_min = age_string.to_i
+      age_max = age_string.to_i
+    end
+
+    ethnicity_and_media_div = role_div.all("p.ethnicities-info")
+    while ethnicity_and_media_div.empty?
+      binding.pry
+      ethnicity_and_media_div = role_div.all("p.ethnicities-info")
+    end
+
+    ethnicity = ethnicity_and_media_div.first.text
+    ethnicity.slice! "Ethnicity: "
+
+    required_media = ethnicity_and_media_div.last.text
+    required_media.slice! "Required Media: "
+
+    description = role_div.find("div.role__desc").text
+    Role.create!(
+      audition: current_audition,
+      title: title,
+      gender: gender,
+      age_min: age_min,
+      age_max: age_max,
+      ethnicity: ethnicity,
+      required_media: required_media,
+      description: description
+    )
+  end
+
+  2.times do browser.go_back end
 end
+
 Actor.destroy_all
 actor = Actor.create!(
   name: 'Chris Donohue',
   phone_number: '2679871412',
   email: 'chris.donohue0628@gmail.com',
-  password: 'tbatst4892'
+  password: 'tbatst4892',
+  gender: 'Male',
+  age: '21',
+  ethnicity: 'Caucasian'
 )
 actor.confirm

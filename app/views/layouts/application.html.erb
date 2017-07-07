@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>StarMatcher</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <title><%= content_for?(:title) ? yield(:title) : "Star Matcher" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <link href="https://fonts.googleapis.com/css?family=Francois+One|PT+Sans|Quicksand:500" rel="stylesheet">
   </head>
 
   <body>
-    <%= link_to "Auditions", root_path %>
-    <% if actor_signed_in? %>
-        <li><%= link_to "Sign Out", destroy_actor_session_path, method: :delete %></li>
-        <li><%= link_to "My Profile", actor_path(current_actor) %></li>
-      <% else %>
-        <li><%= link_to "Create Account", new_actor_registration_path%></li>
-        <li><%= link_to "Sign In", new_actor_session_path%></li>
-    <% end %>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li>
+            <a href="/">Auditions</a>
+          </li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <% if actor_signed_in? %>
+            <li><%= link_to "Sign Out", destroy_actor_session_path, method: :delete %></li>
+            <li><%= link_to "My Profile", actor_path(current_actor) %></li>
+          <% else %>
+            <li><%= link_to "Create Account", new_actor_registration_path%></li>
+            <li><%= link_to "Sign In", new_actor_session_path%></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 
-    <%= yield %>
+  <%= yield %>
+
   </body>
 </html>

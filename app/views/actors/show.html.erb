@@ -1,19 +1,24 @@
-<h1><%= @actor.name %></h1>
-<h2>Auditions</h2>
-<h3>Past Auditions</h3>
-<ul>
-  <% @auditions.each do |audition| %>
-    <% if audition.date < Time.now %>
-    <li><%= link_to "#{audition.show}, #{audition.date.strftime("%B %e")}", audition_path(audition) %></li>
-    <% end %>
+<div class="row" id="profile_page">
+  <h1><%= @actor.name %></h1>
+  <h3>Age: <%= @actor.age %></h3>
+  <h3>Ethnicity: <%= @actor.ethnicity %></h3>
+  <h3>Gender: <%= @actor.gender %></h3>
+  <h2>Auditions</h2>
+  <% if !@past_auditions.empty? %>
+    <h3>Past Auditions</h3>
+    <ul>
+      <% @past_auditions.each do |audition| %>
+        <li><%= link_to "#{audition.show}, #{audition.date.strftime("%B %e")}", audition_path(audition) %></li>
+      <% end %>
+    </ul>
   <% end %>
-</ul>
 
-<h3>Current Auditions</h3>
-<ul>
-  <% @auditions.each do |audition| %>
-    <% if audition.date >= Time.now %>
-    <li><%= link_to "#{audition.show}, #{audition.date.strftime("%B %e")}", audition_path(audition) %></li>
-    <% end %>
+  <% if !@future_auditions.empty? %>
+    <h3>Current Auditions</h3>
+      <% @future_auditions.each do |audition| %>
+        <h5> - <%= link_to "#{audition.show}, #{audition.date.strftime("%B %e")}", audition_path(audition) %></h5>
+      <% end %>
+  <% else %>
+    <h4>No Upcoming Auditions. Keep Looking!</h4>
   <% end %>
-</ul>
+</div>
