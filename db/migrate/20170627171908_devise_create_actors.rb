@@ -23,17 +23,17 @@ class DeviseCreateActors < ActiveRecord::Migration[5.1]
       t.inet     :last_sign_in_ip
 
       ## Confirmable
-      t.string   :confirmation_token
-      t.datetime :confirmed_at
-      t.datetime :confirmation_sent_at
-      t.string   :unconfirmed_email # Only if using reconfirmable
+      # t.string   :confirmation_token
+      # t.datetime :confirmed_at
+      # t.datetime :confirmation_sent_at
+      # t.string   :unconfirmed_email # Only if using reconfirmable
 
       t.timestamps null: false
     end
 
     add_index :actors, :email,                unique: true
     add_index :actors, :reset_password_token, unique: true
-    add_index :actors, :confirmation_token,   unique: true
+    # add_index :actors, :confirmation_token,   unique: true
     # add_index :actors, :unlock_token,         unique: true
   end
 end

@@ -28,16 +28,11 @@ ActiveRecord::Schema.define(version: 20170706215912) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ethnicity"
     t.integer "age"
     t.string "gender"
-    t.index ["confirmation_token"], name: "index_actors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_actors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_actors_on_reset_password_token", unique: true
   end
@@ -50,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170706215912) do
     t.string "company"
     t.string "description"
     t.boolean "equity", null: false
-    t.datetime "date", null: false
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

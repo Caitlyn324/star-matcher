@@ -122,4 +122,12 @@ actor = Actor.create!(
   age: '21',
   ethnicity: 'Caucasian'
 )
-actor.confirm
+dummy = Actor.create!(
+  name: 'dumb dumb',
+  phone_number: '2122122112',
+  email: 'jerry.smith@gmail.com',
+  password: 'something',
+  gender: '',
+  age: '',
+  ethnicity: ''
+)

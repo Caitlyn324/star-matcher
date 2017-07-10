@@ -10,12 +10,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :auditions, only: [:index]
+      resources :actors
     end
   end
-  namespace :api do
-    namespace :v1 do
-      resources :actors, only: [:index]
-    end
-  end
-
 end

@@ -2,6 +2,10 @@
   margin: 15px 30px;
 }
 
+#auditions_found {
+  margin: 0px 0px;
+}
+
 #search-aug {
   text-align: left;
   font-size: 20px;
@@ -23,12 +27,17 @@
   padding: 10px 5px;
 }
 
+#not_signed_in {
+  float: left;
+  padding-left: 15px;
+}
+
 #crew_container {
   padding: 0px 10%;
 }
 
 #show_role_tile {
-  border: 1px solid black;
   padding: 15px 15px;
   margin: 0px 5px;
+  background: #A8E7CA;
 }

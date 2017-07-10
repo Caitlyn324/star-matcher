@@ -16,6 +16,7 @@ gem 'phantomjs', :require => 'phantomjs/poltergeist'
 gem 'nokogiri'
 gem 'foundation-rails'
 gem 'google-webfonts-rails'
+gem 'friendly_id'
 
 group :development do
   gem 'listen', '~> 3.0.5'

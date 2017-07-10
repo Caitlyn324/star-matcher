@@ -7,11 +7,11 @@ class AuditionContainer extends Component {
     super(props);
     this.state = {
       searchTerm: '',
-      allAudition: [],
+      allAuditions: [],
       age: 0,
       gender: "",
       ethnicity: "",
-      signedIn: true,
+      signedIn: false,
       myType: false
     };
 
@@ -38,23 +38,9 @@ class AuditionContainer extends Component {
 
   getData () {
     let AuditionContainer = this;
-    fetch('/api/v1/auditions.json')
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} ($response.statusText)`;
-          let error = new Error(errorMessage);
-          throw (error);
-        }
-      })
-      .then(response => response.json())
-      .then(body => body.sort(AuditionContainer.compare))
-      .then(sortedAudition => {
-        AuditionContainer.setState({ allAudition: sortedAudition });
-      })
-      .catch(error => console.error(`Error in fetch ${error.message}`));
-    fetch('/api/v1/actors.json')
+    fetch('/api/v1/auditions.json', {
+      'credentials': 'same-origin'
+    })
       .then(response => {
         if (response.ok) {
           return response;
@@ -66,17 +52,13 @@ class AuditionContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        if (body !== null) {
-          debugger;
-          AuditionContainer.setState({
-            age: body.age,
-            ethnicity: body.ethnicity,
-            gender: body.gender,
-            signedIn: true
-          });
-        } else {
-          debugger;
-        }
+        AuditionContainer.setState({
+          allAuditions: body.auditions,
+          gender: body.actor.gender,
+          age: body.actor.age,
+          ethnicity: body.actor.ethnicity,
+          signedIn: body.signedIn
+        });
       })
       .catch(error => console.error(`Error in fetch ${error.message}`));
   }
@@ -96,10 +78,10 @@ class AuditionContainer extends Component {
   }
 
   findAudition (searchTerm, auditions) {
-    let allAudition = auditions;
+    let allAuditions = auditions;
     let foundAuditions = [];
     console.log(searchTerm);
-    allAudition.forEach((audition) => {
+    allAuditions.forEach((audition) => {
       var auditionMatch = false;
       if (audition.show.toLowerCase().includes(searchTerm.toLowerCase())) {
         auditionMatch = true;
@@ -110,20 +92,22 @@ class AuditionContainer extends Component {
     return foundAuditions;
   }
 
-  filterByType (age, ethnicity, gender) {
-    let allAudition = this.state.allAudition;
+  filterByType () {
+    let allAuditions = this.state.allAuditions;
     let foundAuditions = [];
-    allAudition.forEach((audition) => {
+    let actor_age = this.state.age;
+    let actor_ethnicity = this.state.ethnicity.toLowerCase()
+    let actor_gender = this.state.gender.toLowerCase()
+
+    allAuditions.forEach((audition) => {
       let match = false;
         audition.roles.forEach((role) => {
           if (!match) {
-            debugger;
-            if (role.age_min <= age && age <= role.age_max) {
-              debugger;
-              if (role.ethnicity.toLowerCase() === "all ethnicities" || role.ethnicity.toLowerCase().inlcudes(ethnicity.toLowerCase())) {
-                debugger;
-                if (role.gender == 'all genders' || role.gender == gender) {
-                  debugger;
+            if (role.age_min <= actor_age && actor_age <= role.age_max) {
+              let role_ethnicity = role.ethnicity.toLowerCase()
+              if (role_ethnicity === '' || role_ethnicity === "all ethnicities" || role_ethnicity.includes(actor_ethnicity)) {
+                let role_gender = role.gender.toLowerCase()
+                if (role_gender == 'all genders' || role_gender == actor_gender) {
                   match = true;
                 }
               }
@@ -139,21 +123,22 @@ class AuditionContainer extends Component {
 
   render () {
     var auditionsToShow = [];
+
     if (this.state.searchTerm === '') {
       if (this.state.myType) {
         auditionsToShow = this.filterByType(this.state.age, this.state.ethnicity);
       } else {
-        auditionsToShow = this.state.allAudition;
+        auditionsToShow = this.state.allAuditions;
       }
     } else {
       if (this.state.myType) {
-        auditionsToShow = this.filterByType(this.state.age, this.state.ethnicity, this.state.gender);
+        auditionsToShow = this.filterByType();
         auditionsToShow = this.findAudition(this.state.searchTerm, auditionsToShow);
       } else {
-        auditionsToShow = this.findAudition(this.state.searchTerm, this.state.allAudition);
+        auditionsToShow = this.findAudition(this.state.searchTerm, this.state.allAuditions);
       }
     }
-
+    let totalSize = auditionsToShow.length;
     return (
       <div id="Audition-Container">
           <SearchBar
@@ -167,6 +152,7 @@ class AuditionContainer extends Component {
             handleMyType={this.handleMyType}
             auditions={auditionsToShow}
             signedIn={this.state.signedIn}
+            size={totalSize}
           />
         </div>
       </div>

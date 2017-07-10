@@ -9,7 +9,9 @@ class AuditionsList extends Component {
     this.state = {
       auditions: [],
       currentPage: 1,
-      auditionsPerPage: 4
+      auditionsPerPage: 4,
+      totalSize: 0,
+      signedIn: false
     };
 
     this.previousPage = this.previousPage.bind(this);
@@ -17,7 +19,11 @@ class AuditionsList extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState({ auditions: nextProps.auditions });
+    this.setState({
+      auditions: nextProps.auditions,
+      totalSize: nextProps.size,
+      signedIn: nextProps.signedIn
+    });
   }
 
   previousPage (event) {
@@ -49,7 +55,6 @@ class AuditionsList extends Component {
       currentAuditions = this.state.auditions.slice(indexOfFirstAudition, indexOfLastAudition);
     }
 
-
     let buttons = null;
     if (this.state.auditions.length > this.state.auditionsPerPage) {
       buttons = <PaginationButtons
@@ -58,18 +63,26 @@ class AuditionsList extends Component {
       />;
     }
 
-    let myTypeField = <label className='small-6 columns'value="myType" id="myTypeLabel">
-      <input type="checkbox"
-      id="myTypeCheckbox"
-      value="myType"
-      checked={this.props.myType}
-      onChange={this.props.handleMyType} />Search by Your Type
-    </label>
+    let myTypeField = null
+    if (this.state.signedIn) {
+      myTypeField = <div className='small-6 columns'>
+        <h6 id="auditions_found">{this.state.totalSize} Auditions Found!</h6>
+        <label value="myType" id="myTypeLabel">
+          <input type="checkbox"
+            id="myTypeCheckbox"
+            value="myType"
+            checked={this.props.myType}
+            onChange={this.props.handleMyType} />Search by Your Type
+          </label>
+      </div>
+    } else {
+      myTypeField = <h6 id="not_signed_in">Sign in it view auditions based on your type!</h6>
+    }
 
     let newAuditions = currentAuditions.map((audition, index) => {
       var role_string;
       if (audition.roles.length === 1) {
-        role_string = audition.roles[0].title
+        role_string = "Role: " + audition.roles[0].title
       } else {
         role_string = audition.roles.length.toString() + " Roles Available"
       }

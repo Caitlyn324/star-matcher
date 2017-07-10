@@ -45,7 +45,11 @@
 <div class="row text-center">
   <h3>Roles</h3>
   <% @audition.roles.each do |role| %>
-    <div class="large-6 small-12 <%= @centered %> columns" id="show_roles_column_container">
+    <% if role != @audition.roles.last %>
+      <div class="large-6 small-12 columns" id="show_roles_column_container">
+    <% else %>
+      <div class="large-6 small-12 columns end" id="show_roles_column_container">
+    <% end %>
       <div id="show_role_tile">
         <h4><%= role.title %></h4>
         <h5>Age: <%= role.age_min %>-<%= role.age_max %></h5>
