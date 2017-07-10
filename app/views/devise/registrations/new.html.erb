@@ -42,10 +42,10 @@
   </div>
 
   <div class="gender">
-    <%= radio_button_tag(:gender, "Male") %>
-    <%= label_tag(:gender_child, "Male") %>
-    <%= radio_button_tag(:gender, "Female") %>
-    <%= label_tag(:gender_adult, "Female") %>
+    <%= f.radio_button :gender, "Male" %>
+    <%= f.label :gender, "Male" %>
+    <%= f.radio_button :gender, "Female" %>
+    <%= f.label :gender, "Female" %>
   </div>
 
   <div class="actions">

@@ -52,6 +52,7 @@ class AuditionContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
+        debugger;
         AuditionContainer.setState({
           allAuditions: body.auditions,
           gender: body.actor.gender,
