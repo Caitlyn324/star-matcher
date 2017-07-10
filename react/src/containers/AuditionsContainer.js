@@ -98,7 +98,8 @@ class AuditionContainer extends Component {
     let actor_age = this.state.age;
     let actor_ethnicity = this.state.ethnicity.toLowerCase()
     let actor_gender = this.state.gender.toLowerCase()
-
+    debugger;
+    
     allAuditions.forEach((audition) => {
       let match = false;
         audition.roles.forEach((role) => {
