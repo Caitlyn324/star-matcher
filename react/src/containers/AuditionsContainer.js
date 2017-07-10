@@ -93,13 +93,13 @@ class AuditionContainer extends Component {
   }
 
   filterByType () {
+    debugger;
     let allAuditions = this.state.allAuditions;
     let foundAuditions = [];
     let actor_age = this.state.age;
     let actor_ethnicity = this.state.ethnicity.toLowerCase()
     let actor_gender = this.state.gender.toLowerCase()
-    debugger;
-    
+
     allAuditions.forEach((audition) => {
       let match = false;
         audition.roles.forEach((role) => {
